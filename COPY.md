@@ -136,7 +136,7 @@ After the first season I spent about a decade developing larger versions of Pion
 
 `p`
 
-I’ve come back to it from somewhere else. Three things are actually happening:
+I’ve come back to it from somewhere else. Four things are actually happening:
 
 `li`
 
@@ -145,6 +145,10 @@ A feature film. I’m writing a feature-length interpretation of the material �
 `li`
 
 The original six episodes. Going back through the season and working out what a proper restoration and re-release would actually involve.
+
+`li`
+
+A documentary. I’m making a documentary about how the show got made — about arguing for something that turned out to be right, years before it was obvious.
 
 `li`
 
@@ -206,6 +210,10 @@ We raised $6,000 on Kickstarter. At the time, every request for money had to be 
 
 The premise was straightforward. Something falls out of the sky over North America and spreads radiation as it comes down. It looks like a terrorist attack. It is a Cold War relic, and the boy found inside it says he was born on Mars, to cosmonauts sent there by a country that no longer exists. We wrote it as a political and procedural drama that happens to have a Martian in it, rather than as science fiction with politics attached.
 
+`figcaption`
+
+The site’s own header, March 2011.
+
 `h2`
 
 Giving it away
@@ -221,10 +229,6 @@ In those same two weeks, people we had never met sent us about $20,000 through a
 `p`
 
 The money shot episodes two, three and four together over a single October. The remaining episodes were funded the same way, which is the reason for the long gaps between them — every few months the production stopped and asked again.
-
-`figcaption`
-
-Production still, season one.
 
 `h2`
 
@@ -245,10 +249,6 @@ The pilot won Best Drama Pilot at the New York Television Festival in 2010, and 
 `p`
 
 The sixth episode premiered at Anthology Film Archives in New York on December 5, 2011, and was released on December 13. Then it stopped.
-
-`figcaption`
-
-Production still, season one.
 
 `h2`
 
@@ -332,7 +332,7 @@ Who made it
 
 `p`
 
-Season one was developed by Josh Bernhard and Bracey Smith and produced by LastSat Productions LLC, and released under a Creative Commons Attribution-NonCommercial-ShareAlike license — which is why the original files are still legally mirrored at the Internet Archive fifteen years later.
+Season one was developed by Josh Bernhard and Bracey Smith and produced by LastSat Productions LLC.
 
 `p`
 

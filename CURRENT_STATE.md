@@ -21,17 +21,17 @@ docs:
   - ~/Development/pioneerone/STORY-SOURCES.md
 git:
   branch: main
-  head: 783bfd3
-  head_subject: 'Editing pass: American English, "boy", credits, press, VOD'
+  head: b1b5e39
+  head_subject: Pull the credits and the archive; align the text column
   dirty: 1
   ahead: 0
   behind: 0
-  observed_at: '2026-08-15T21:24:42Z'
-latest_session: 20260815T212442Z-de5f5c4d.md
+  observed_at: '2026-08-15T22:00:44Z'
+latest_session: 20260815T220044Z-de5f5c4d.md
 resume:
   directory: /home/fs42/Development/pioneerone
   command: cd /home/fs42/Development/pioneerone && claude
-updated_at: '2026-08-15T21:24:42Z'
+updated_at: '2026-08-15T22:00:44Z'
 provenance:
   status:
     source: model
@@ -62,12 +62,12 @@ provenance:
     at: '2026-08-15T17:01:25Z'
   git:
     source: observed
-    at: '2026-08-15T21:24:42Z'
+    at: '2026-08-15T22:00:44Z'
 ---
 
 # pioneerone — Current State
 
-_Generated 2026-08-15T21:24:42Z. The front-matter above is the source of truth; this body is rendered from it._
+_Generated 2026-08-15T22:00:44Z. The front-matter above is the source of truth; this body is rendered from it._
 
 | | |
 |---|---|
@@ -75,9 +75,9 @@ _Generated 2026-08-15T21:24:42Z. The front-matter above is the source of truth; 
 | **Current milestone** | M1 complete — weekend MVP built, verified locally, committed and pushed private to speakhard/pioneerone (d4fc748) |
 | **Next milestone** | M2 — Cloudflare Pages project and custom domain; then the archive |
 | **Branch** | main |
-| **HEAD** | 783bfd3 — Editing pass: American English, "boy", credits, press, VOD |
+| **HEAD** | b1b5e39 — Pull the credits and the archive; align the text column |
 | **Working tree** | 1 changed |
-| **Observed** | 2026-08-15T21:24:42Z |
+| **Observed** | 2026-08-15T22:00:44Z |
 
 ## Today's goal
 
@@ -160,6 +160,6 @@ Do not revisit completed architectural decisions unless necessary.
 | blockers | model | 2026-08-15T17:01:25Z | — |
 | risks | model | 2026-08-15T17:01:25Z | — |
 | docs | model | 2026-08-15T17:01:25Z | — |
-| git | observed | 2026-08-15T21:24:42Z | — |
+| git | observed | 2026-08-15T22:00:44Z | — |
 
-_Latest session log: `20260815T212442Z-de5f5c4d.md`_
+_Latest session log: `20260815T220044Z-de5f5c4d.md`_

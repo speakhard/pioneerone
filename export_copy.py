@@ -89,21 +89,20 @@ def main() -> int:
         "",
     ]
 
-    total = 0
+    blocks = []
     for url, relative in PAGES:
         page = SITE / relative
         if not page.exists():
             continue
+        found = extract(page.read_text(encoding="utf-8"))
+        blocks += found
         lines += ["---", "", f"## {url}", ""]
-        for label, text in extract(page.read_text(encoding="utf-8")):
+        for label, text in found:
             lines += [f"`{label}`", "", text, ""]
-            total += 1
 
     OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    words = sum(len(t.split()) for _, t in
-                (b for _, rel in PAGES if (SITE / rel).exists()
-                 for b in extract((SITE / rel).read_text(encoding="utf-8"))))
-    print(f"{OUT.name}: {total} blocks, {words} words")
+    words = sum(len(text.split()) for _, text in blocks)
+    print(f"{OUT.name}: {len(blocks)} blocks, {words} words")
     return 0
 
 

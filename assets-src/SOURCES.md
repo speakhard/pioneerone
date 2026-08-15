@@ -45,9 +45,25 @@ one still the site serves below its ideal resolution. `prepare_assets.py`
 refuses to upscale it. If the original turns up on a drive, drop it in as
 `ep6-full.png`, point `EPISODE_STILLS` at it, and re-run.
 
-**`vlc-a.png` and `vlc-b.png`** illustrate the story page. Nothing establishes
-which episodes they come from, so both are captioned "Production still, season
-one" and nothing more. A caption that guesses is how an archive starts lying.
+**`vlc-a.png` and `vlc-b.png` are not published, and this is why.**
+
+They were briefly used to illustrate the story page, captioned "Production
+still, season one" on the reasoning that a vague caption was safe because it
+guessed at nothing. Josh then identified `vlc-a.png` — the control room — as a
+frame from *Control*, the other pilot this team made in 2012. Not Pioneer One
+at all.
+
+The vague caption did not save it. "Production still, season one" asserted the
+show and the season, which is exactly the thing that was wrong, and the
+hedging only made the error harder to notice. Both files came out: `vlc-b.png`
+has identical provenance to the one that was wrong, so there is no reason to
+trust it either.
+
+The lesson worth keeping: for these two files the upload path
+(`/wp-content/uploads/2012/11/`) proves only when WordPress received them,
+not what they show. The episode stills are safe because the production named
+them `ep3-a`, `episode-2-a` and so on — the filename carries the claim. Where
+no filename carries a claim, the image does not go up.
 
 **`p1-total-downloads-april2012.jpg`** is listed in the Wayback index and would
 be good evidence for the 4.1-million figure, but every capture of it returns

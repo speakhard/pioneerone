@@ -122,6 +122,24 @@ Note also: Wikipedia spells the character **Sofie** Larson, TVmaze spells it
 This list is certainly incomplete. Everyone who worked on the show unpaid has a
 claim to being on it.
 
+## Mistakes made and corrected
+
+Recorded so the same shape of error is easier to spot next time.
+
+1. **A still from the wrong show.** A control-room frame was published as a
+   Pioneer One production still. It is from *Control*, the 2012 pilot by the
+   same team. Both unverified frames were withdrawn. See
+   `assets-src/SOURCES.md`.
+2. **Reconstructed credits.** A cast and crew list assembled from Wikipedia and
+   the YouTube descriptions was wrong. Withdrawn; see `content/credits.toml`.
+3. **"Man" for "boy"**, corrected from the production's own copy.
+4. **$20,000 presented as the total**, when it was the first two weeks of a
+   figure that reached $100,000.
+
+The common thread is publishing something plausible in place of something
+checked. Where a claim cannot be sourced to the production's own words, it
+should not be on the site.
+
 ## For Josh to confirm
 
 1. **The credits above**, particularly the `wikipedia`-sourced names and

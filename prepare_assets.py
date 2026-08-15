@@ -110,16 +110,9 @@ def build_keyart() -> None:
     print("  keyart:", ", ".join(save_widths(im, "keyart", (1200, 700))))
 
 
-# Two frames used to illustrate the story page. Their captions say only
-# "production still" — the filenames the production gave them do not identify
-# an episode, and a caption that guesses is how an archive starts lying.
-STORY_FIGURES = {"still-control": "vlc-a.png", "still-podium": "vlc-b.png"}
-
-
-def build_story_figures() -> None:
-    for stem, filename in STORY_FIGURES.items():
-        im = crop_to(load(filename), 16 / 9)
-        print(f"  {stem}:", ", ".join(save_widths(im, stem, (825, 560))))
+# vlc-a.png and vlc-b.png are deliberately not derived. See assets-src/SOURCES.md:
+# one of them turned out to be from Control, a different show by the same
+# people, and the other cannot be told apart from it.
 
 
 def build_social_card() -> None:
@@ -206,7 +199,6 @@ def main() -> None:
     build_hero()
     build_episode_cards()
     build_keyart()
-    build_story_figures()
     build_social_card()
     build_icons()
     build_wordmark()
