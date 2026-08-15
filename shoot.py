@@ -23,7 +23,7 @@ DEVICES = [
     ("desktop", 1600, 1000, 2),
 ]
 
-PAGES = [("home", "/"), ("story", "/story/"), ("archive", "/archive/")]
+PAGES = [("home", "/"), ("story", "/story/")]
 
 
 def main() -> int:

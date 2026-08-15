@@ -3,10 +3,15 @@
 Things deliberately not done for the weekend MVP. Nothing here is a defect;
 each was a decision to keep the homepage finishable.
 
-## The archive proper
+## The archive
 
-The largest one, and the reason `/archive/` currently says "not open yet"
-rather than showing a thin version of itself. Known to exist:
+Cut from the site entirely on 2026-08-15, not deferred. An archive page only
+earns its place as material for something — a documentary about making the
+series is the obvious candidate — and nobody has committed to that, so the
+site does not promise it. If the documentary becomes real, this material is
+its source and the page comes back in that context.
+
+Known to exist:
 
 - 32 behind-the-scenes video blogs made during production
 - Scripts at several drafts

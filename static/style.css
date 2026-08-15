@@ -755,12 +755,18 @@ h3 { font-size: 1.1rem; letter-spacing: 0; }
 /* Story and Archive are documents, so their column is centered in the shell
  * rather than pinned to the left. Left-pinning is right when something sits
  * beside the text; on these pages nothing does, and the result was a narrow
- * column of prose with a screen-wide void to the right of it. */
-.page-head > .shell > *,
+ * column of prose with a screen-wide void to the right of it.
+ *
+ * The column is established once, on the containers, and never on the
+ * individual children. Centering each child instead would line them up only
+ * when they happened to be the same width: the eyebrow, the headline and the
+ * standfirst all carry their own max-width and their own `margin: 0`, so they
+ * drifted out of the column and out of line with each other. Constrain the
+ * box, let the text sit at its left edge. */
 .article { margin-inline: auto; }
 
 .page-head { padding-block: clamp(3.5rem, 9vw, 6rem) clamp(2rem, 5vw, 3rem); }
-.page-head > .shell > * { max-width: var(--measure); }
+.page-head > .shell { max-width: calc(var(--measure) + var(--gutter) * 2); }
 .page-head h1 { max-width: 20ch; }
 
 .page-head h1 {

@@ -39,8 +39,19 @@ def episodes() -> list[dict]:
         return sorted(tomllib.load(handle)["episode"], key=lambda e: e["number"])
 
 
+def test_no_archive_page_is_published(site: Path):
+    """The archive was pulled on 2026-08-15.
+
+    It only made sense as material for a documentary that is not announced, and
+    a site should not carry a page promising something nobody has committed to.
+    """
+    assert not (site / "archive").exists(), "the archive page came back"
+    home = (site / "index.html").read_text(encoding="utf-8")
+    assert ">Archive<" not in home, "an Archive link is still in the navigation"
+
+
 def test_every_page_is_written(site: Path):
-    for path in ("index.html", "story/index.html", "archive/index.html"):
+    for path in ("index.html", "story/index.html"):
         assert (site / path).is_file(), f"{path} was not built"
 
 
@@ -127,7 +138,7 @@ def test_structured_data_is_valid_json_and_lists_the_season(home: str):
 
 def test_pages_carry_their_own_title_and_description(site: Path):
     seen = set()
-    for path in ("index.html", "story/index.html", "archive/index.html"):
+    for path in ("index.html", "story/index.html"):
         html = (site / path).read_text(encoding="utf-8")
         title = re.search(r"<title>(.*?)</title>", html, re.S).group(1)
         description = re.search(r'<meta name="description" content="([^"]+)"', html).group(1)

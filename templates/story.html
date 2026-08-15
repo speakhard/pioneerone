@@ -10,7 +10,8 @@
   <div class="shell">
     <p class="eyebrow">The story</p>
     <h1>How it got made, and what happened next.</h1>
-    <p class="standfirst">Written by Josh Bernhard, who wrote it the first time.</p>
+    <p class="standfirst">Six episodes, a decade of development, and what is
+    left when both are over.</p>
   </div>
 </div>
 
@@ -164,39 +165,19 @@
       <figcaption>Season one key art, 2011.</figcaption>
     </figure>
 
-    <h2 id="credits">Cast and crew</h2>
+    <h2 id="credits">Who made it</h2>
 
     <p>Season one was developed by {{ production.developed_by }} and produced by
-    {{ production.company }}, shot in {{ production.locations }}, and released under a
+    {{ production.company }}, and released under a
     <a href="{{ production.licence_url }}" rel="noopener">{{ production.licence }}</a>
     license &mdash; which is why the original files are still legally mirrored at the
     Internet Archive fifteen years later.</p>
 
-    <dl class="credits">
-      <dt>Cast</dt>
-      <dd>
-        <ul>
-          {% for person in cast %}
-          <li><b>{{ person.actor }}</b><span>{{ person.role }}</span></li>
-          {% endfor %}
-        </ul>
-      </dd>
-
-      <dt>Crew</dt>
-      <dd>
-        <ul>
-          {% for person in crew %}
-          <li><b>{{ person.name }}</b><span>{{ person.role }}</span></li>
-          {% endfor %}
-        </ul>
-      </dd>
-    </dl>
-
-    <p class="credits__note">This list is reconstructed &mdash; the original site&rsquo;s cast
-    and crew pages were published empty and never filled in. Most of it comes from the
-    production&rsquo;s own episode descriptions; the rest is corroborated elsewhere and marked
-    as such in the repository. If you worked on Pioneer One and you are missing or
-    miscredited here, that is an error and I would like to fix it.</p>
+    <p>A full cast and crew list belongs here and is not up yet. The original site&rsquo;s
+    cast and crew pages were published empty and never filled in, so there is nothing
+    authoritative to recover, and a reconstructed list turned out to be wrong. These are
+    people who did professional work for no money; the credit should be right before it is
+    public.</p>
 
     <p><a href="{{ rel }}#watch">Watch the season &rarr;</a></p>
 

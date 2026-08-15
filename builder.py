@@ -34,7 +34,6 @@ STAGING = ROOT / "site.tmp"
 PAGES = [
     ("index.html", Path("index.html"), "home", ""),
     ("story.html", Path("story/index.html"), "story", "../"),
-    ("archive.html", Path("archive/index.html"), "archive", "../"),
 ]
 
 
@@ -223,7 +222,7 @@ def write_extras(out: Path, site: dict) -> None:
 
     urls = "".join(
         f"  <url><loc>{base}/{path}</loc></url>\n"
-        for path in ("", "story/", "archive/")
+        for path in ("", "story/")
     )
     (out / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -312,8 +311,6 @@ def build(site_dir: Path | None = None) -> Path:
             episodes=episodes,
             laurels=laurels,
             press=press,
-            cast=credits_cfg["cast"],
-            crew=credits_cfg["crew"],
             production=credits_cfg["production"],
             page=page,
             rel=rel,
