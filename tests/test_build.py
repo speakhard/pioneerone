@@ -218,3 +218,34 @@ def test_text_colours_meet_wcag_aa():
 def test_brand_red_is_the_one_sampled_from_the_wordmark():
     """#cf3827 comes from the 2024 wordmark. Drifting off it is a real change."""
     assert _tokens()["--red"] == "#cf3827"
+
+
+# --- the signup section --------------------------------------------------
+
+@pytest.mark.parametrize(
+    "newsletter, expected",
+    [
+        ({"action": "https://example.com/subscribe"}, "form"),
+        ({"action": "", "fallback_email": "a@b.c", "fallback_verified": True}, "mailto"),
+        ({"action": "", "fallback_email": "a@b.c", "fallback_verified": False}, "channel"),
+        ({"action": "", "fallback_email": "", "fallback_verified": True}, "channel"),
+        ({}, "channel"),
+    ],
+)
+def test_signup_offers_only_what_actually_works(newsletter, expected):
+    assert builder.newsletter_mode(newsletter) == expected
+
+
+def test_an_unverified_address_is_never_published(home: str):
+    """The near-miss this guards against.
+
+    contact@pioneerone.tv does not exist, but the domain has MX records at
+    Bluehost — so mail to it is accepted and dropped with no bounce. Publishing
+    it would have produced a contact button that swallowed replies silently.
+    """
+    with (ROOT / "content" / "site.toml").open("rb") as handle:
+        newsletter = tomllib.load(handle)["newsletter"]
+    if not newsletter.get("action") and not newsletter.get("fallback_verified"):
+        address = newsletter.get("fallback_email", "")
+        assert address not in home, f"{address} is unverified but appears on the page"
+        assert "mailto:" not in home, "an unverified build still rendered a mailto"

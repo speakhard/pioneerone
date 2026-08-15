@@ -152,6 +152,50 @@ def structured_data(site: dict, episodes: list[dict], watch: dict) -> str:
     ).replace("<", r"\u003c")  # cannot break out of the <script> that carries it
 
 
+def newsletter_mode(newsletter: dict) -> str:
+    """Decide what the "stay in touch" section can honestly offer.
+
+    Three outcomes, best first:
+
+      "form"    a real signup endpoint is configured
+      "mailto"  no endpoint, but an address somebody has confirmed receives mail
+      "channel" neither — so the section offers the YouTube channel instead,
+                which is a real place to follow the show and works today
+
+    The "channel" case exists because of a specific near-miss. The site was a
+    step from shipping a contact button pointing at contact@pioneerone.tv,
+    which does not exist. The domain has MX records at Bluehost, so mail to a
+    missing local part is accepted at the edge and dropped: no bounce, no
+    error, and the one person who wanted to hear more never hears more.
+
+    So an unverified address is never published. It degrades instead of
+    failing, because a hard build error here would block a deploy over a
+    two-minute mailbox change — but it degrades loudly, and the warning lands
+    in the Cloudflare build log where it will be seen.
+    """
+    if newsletter.get("action"):
+        return "form"
+
+    email = newsletter.get("fallback_email")
+    if email and newsletter.get("fallback_verified"):
+        return "mailto"
+
+    print(
+        "  warning: no signup endpoint, and "
+        + (
+            f"{email!r} is not marked verified"
+            if email
+            else "no fallback_email is set"
+        )
+        + " — the section will offer the YouTube channel instead of an email link.\n"
+        "           To publish an email link: create the mailbox or forwarder,\n"
+        "           send it a test message that arrives, then set\n"
+        "           newsletter.fallback_verified = true in content/site.toml.\n"
+        "           To publish a real form instead, set newsletter.action."
+    )
+    return "channel"
+
+
 def write_extras(out: Path, site: dict) -> None:
     base = site["canonical_url"].rstrip("/")
 
@@ -216,6 +260,8 @@ def build(site_dir: Path | None = None) -> Path:
     newsletter = site_cfg["newsletter"]
     laurels = episodes_cfg["laurel"]
 
+    signup = newsletter_mode(newsletter)
+
     env = Environment(
         loader=FileSystemLoader(TEMPLATES),
         autoescape=select_autoescape(["html"]),
@@ -238,6 +284,7 @@ def build(site_dir: Path | None = None) -> Path:
             site=site,
             watch=watch,
             newsletter=newsletter,
+            signup=signup,
             episodes=episodes,
             laurels=laurels,
             page=page,

@@ -29,15 +29,34 @@ because this plan needs one, but because that install is the only copy of
 whatever has accumulated in it since 2010, and it is about to stop being the
 thing serving the domain.
 
+## The domain also carries live email — read this before touching DNS
+
+`pioneerone.tv` is not only a website. It has working mail at Bluehost:
+
+    MX    pioneerone.tv          0 mail.pioneerone.tv
+    A     mail                   50.6.154.91
+    A     webmail                50.6.154.91
+    A     autodiscover           50.6.154.91
+    CNAME smtp                   mail.pioneerone.tv
+    TXT   pioneerone.tv          "v=spf1 ip4:50.6.154.59 a mx include:websitewelcome.com ~all"
+
+**Losing these breaks email for the domain, silently and completely.** They are
+listed here so they can be checked off one by one after the zone is imported,
+rather than discovered missing a week later.
+
+Note also what this means for the site: `contact@pioneerone.tv` does not exist
+as a mailbox, but the domain *does* accept mail, so anything sent to it is
+taken at the edge and dropped without a bounce. That is why the build refuses
+to publish an unverified address — see step 6.
+
 ## 1. The repository
 
-Already created and pushed, private, matching every other project here:
+Public, at:
 
     git@github.com:speakhard/pioneerone.git
 
-Nothing in it is secret — it is prose, public URLs, and images recovered from
-the Internet Archive — so making it public later is a free choice, not a
-disclosure decision. Cloudflare Pages reads private repositories happily.
+Nothing in it is secret: prose, public URLs, and images recovered from the
+Internet Archive.
 
 ## 2. The Pages project
 
@@ -86,27 +105,40 @@ And open it on a phone. That is the entire point of the site.
 
 ## 4. The custom domain
 
-This is the only step that changes what the public sees, and the only one that
-needs thinking about.
+This is the only step that changes what the public sees.
 
-`pioneerone.tv` is on Bluehost nameservers today, so Cloudflare cannot add the
-record for you the way it does for zones already on the account. Two routes:
+There is really only one route, and it is worth knowing why. Pointing a domain
+at Pages from external DNS needs a CNAME, and classic DNS forbids a CNAME at
+the apex — so leaving the zone at Bluehost can only put `www.pioneerone.tv` on
+Pages, never the bare `pioneerone.tv`. The bare domain is the one you say out
+loud, so: **move the zone to Cloudflare**, which resolves apex CNAMEs by
+flattening them.
 
-**(a) Move the zone to Cloudflare** — add `pioneerone.tv` as a zone in the same
-Cloudflare account, let it import the existing records, then change the
-nameservers at the registrar. Afterwards the Pages custom domain attaches in one
-click, exactly like the other four sites. Slower to start (nameserver changes
-take hours to propagate) but leaves the domain managed alongside everything else.
+1. Cloudflare → Add a site → `pioneerone.tv`. Let it scan and import.
 
-**(b) Point a CNAME from Bluehost** — in Bluehost's DNS, point `pioneerone.tv`
-and `www` at the `*.pages.dev` hostname. Faster, but leaves DNS split across two
-providers, which is how a domain gets lost in three years' time.
+2. **Before changing any nameservers**, check the imported records against the
+   mail list at the top of this file. All six must be present and correct.
 
-(a) is the better long-term answer and matches the rest of the estate. (b) is
-the one to reach for if the site has to be live by Saturday.
+3. Set every mail record to **DNS only** (grey cloud, not orange). Proxying
+   `mail`, `webmail`, `smtp` or `autodiscover` routes mail through Cloudflare's
+   HTTP proxy, which does not speak SMTP, and mail stops. This is the single
+   most common way this migration goes wrong.
 
-Either way: add **both** `pioneerone.tv` and `www.pioneerone.tv` to the Pages
-project, so the address people half-remember still works.
+4. Leave `A pioneerone.tv → 66.235.200.147` and `CNAME www → pioneerone.tv` as
+   imported for now. The WordPress site keeps serving through the nameserver
+   change, so the switch to Pages is a separate, deliberate step you take once
+   you are happy with the preview.
+
+5. Change the nameservers at the registrar to the two Cloudflare gives you.
+   Propagation is usually under an hour but can take longer. Nothing visible
+   changes when it completes — that is the point.
+
+6. Confirm mail still works: send a message to an address on the domain that
+   you know exists, and watch it arrive. Do this **before** step 7.
+
+7. Pages project → Custom domains → add **both** `pioneerone.tv` and
+   `www.pioneerone.tv`. Cloudflare replaces the A record with its own routing.
+   This is the moment the public sees the new site.
 
 ## 5. Verify on the real domain
 
@@ -119,22 +151,45 @@ project, so the address people half-remember still works.
 HTTPS is automatic — Pages issues the certificate once the domain is attached.
 Give it a few minutes before concluding it is broken.
 
-## 6. Rollback
+## 6. The "stay in touch" section
+
+As shipped, this section offers the YouTube channel, not an email link. That is
+deliberate: `contact@pioneerone.tv` does not exist, the domain accepts mail for
+it anyway, and a contact button that swallows replies is worse than no button.
+
+Two minutes of work upgrades it. In Bluehost cPanel → **Forwarders** (or
+**Email Accounts**), create `contact@pioneerone.tv` pointing at whichever inbox
+you actually read. Send it a test message and watch it arrive. Then:
+
+    # content/site.toml
+    fallback_verified = true
+
+Commit and push; Pages rebuilds and the section becomes an email link. The
+build prints a warning in the Cloudflare log for as long as this is unverified,
+so it cannot be quietly forgotten.
+
+If you would rather have a real list, set `newsletter.action` to any endpoint
+that accepts a POSTed `email` field and the section becomes a form instead.
+
+## 7. Rollback
 
 Pages keeps every deployment: Project → Deployments → the last good one →
 Rollback. A failed build never replaces a working site.
 
-To put the old WordPress site back, point DNS back at `66.235.200.147`. Nothing
-in this project has modified that install, so it is still there waiting. This is
-the reason step 4 is last and everything before it is verifiable on `pages.dev`.
+To put the old WordPress site back, point the apex A record at
+`66.235.200.147` again and remove the custom domain from the Pages project.
+Nothing in this project has modified that install, so it is still there
+waiting. This is why the nameserver move and the domain attachment are separate
+steps, and why everything before them is verifiable on `pages.dev`.
 
 ## Afterwards
 
-- **The mailing list.** `newsletter.action` in `content/site.toml` is empty, so
-  the signup renders a mailto link to `contact@pioneerone.tv`. Confirm that
-  address still routes, or set `action` to a real endpoint. One line.
 - **The old URLs.** The 2010–2012 site used `/YYYY/MM/DD/slug/` permalinks and
   there are live inbound links to them from TorrentFreak and elsewhere. They
   will 404. Redirects belong in a `_redirects` file when the archive lands and
   there is somewhere to send them; sending them all to `/` today would be worse
   than a 404.
+- **The WordPress install.** Once the domain is on Pages, that install is no
+  longer serving anything but is still running, still on 6.7.1, and still
+  reachable at its IP. Decide whether to keep it as a mail host only, or
+  retire it — but export it first either way.

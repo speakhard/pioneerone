@@ -35,6 +35,17 @@ archive_org_url = "https://archive.org/details/pioneer.one.season1.720p.x264-vod
 # section renders a plain mailto link instead of a form, which needs no service
 # and cannot quietly break.
 action = ""
+
+# The address behind that mailto. `fallback_verified` must be set to true by
+# somebody who has actually sent mail to it and watched it arrive.
+#
+# This is not ceremony. On 2026-08-15 the site was a step away from shipping a
+# "stay in touch" button pointing at contact@pioneerone.tv, which does not
+# exist — the domain has MX records at Bluehost, so mail to it is accepted and
+# then goes nowhere. A dead contact link fails silently and in the one direction
+# that matters: someone who wanted to hear more, not hearing more. So the build
+# refuses rather than trusting that the address is fine.
 fallback_email = "contact@pioneerone.tv"
+fallback_verified = false
 heading = "If Pioneer One continues, you’ll hear it here first."
 note = "Occasional, and only when there is something to say."

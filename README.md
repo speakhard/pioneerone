@@ -47,10 +47,16 @@ screenshot alone will not show you.
 is read. **Episode data** lives in `content/episodes.toml`. **Site-wide
 settings** live in `content/site.toml`.
 
-**Turning on the mailing list** is one line: set `newsletter.action` in
-`content/site.toml` to any endpoint that accepts a POSTed `email` field. Until
-then the section renders a mailto link, which needs no service and cannot
-quietly break.
+**The "stay in touch" section** offers whichever of three things is actually
+true, decided by `newsletter_mode()` in `builder.py`: a form if
+`newsletter.action` names a signup endpoint; a mailto if `fallback_email` is
+set *and* `fallback_verified` is true; otherwise the YouTube channel.
+
+An address is never published on the strength of being written down. The domain
+has MX records at Bluehost, so mail to an address that does not exist is
+accepted and dropped without a bounce — `contact@pioneerone.tv` is exactly that
+today. Verify the mailbox by sending it something and watching it arrive, then
+set `fallback_verified = true`.
 
 **Adding images** means dropping originals in `assets-src/`, recording where
 they came from in `assets-src/SOURCES.md`, and re-running `prepare_assets.py`.

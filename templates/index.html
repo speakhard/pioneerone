@@ -203,20 +203,35 @@
     <p class="signup__heading" id="signup-h">{{ newsletter.heading }}</p>
     <p class="signup__note">{{ newsletter.note }}</p>
 
-    {% if newsletter.action %}
+    {# Three ways this can go, decided in builder.py by newsletter_mode(). The
+       site only ever offers something that actually works: an unverified email
+       address is not published, because mail to a missing local part on this
+       domain is accepted and then dropped without a bounce. #}
+    {% if signup == "form" %}
     <form class="signup__form" action="{{ newsletter.action }}" method="post">
       <label class="visually-hidden" for="email">Email address</label>
       <input type="email" id="email" name="email" required autocomplete="email"
              inputmode="email" placeholder="you@example.com">
       <button class="btn" type="submit">Notify me</button>
     </form>
-    {% else %}
-    {# No list provider is configured, so the site does not pretend to have one.
-       A mailto needs no service, cannot silently fail, and is honest about what
-       happens next. One line in content/site.toml replaces it with a real form. #}
+
+    {% elif signup == "mailto" %}
     <p><a class="btn" href="mailto:{{ newsletter.fallback_email }}?subject=Pioneer%20One%20updates">Add me to the list</a></p>
     <p class="signup__aside">Opens an email to {{ newsletter.fallback_email }}. There is no list
     software behind this yet, which seemed better than pretending there is.</p>
+
+    {% else %}
+    <p>
+      <a class="btn" href="{{ watch.channel_url }}" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true" focusable="false">
+          <path d="M0 0v15l13-7.5z" fill="currentColor"/>
+        </svg>
+        Follow on YouTube
+      </a>
+    </p>
+    <p class="signup__aside">There is no mailing list yet &mdash; rather than a signup box with
+    nothing behind it, here is the channel the episodes are on, which is where anything new
+    would appear first.</p>
     {% endif %}
   </div>
 </section>
