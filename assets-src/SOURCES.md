@@ -45,10 +45,13 @@ one still the site serves below its ideal resolution. `prepare_assets.py`
 refuses to upscale it. If the original turns up on a drive, drop it in as
 `ep6-full.png`, point `EPISODE_STILLS` at it, and re-run.
 
-**Not used by the site.** `vlc-a.png` (a mission-control room) and `vlc-b.png`
-(a press conference) are held here because they are good frames, but they are
-not published: nothing establishes which episodes they come from, and captions
-that guess are how an archive starts lying.
+**`vlc-a.png` and `vlc-b.png`** illustrate the story page. Nothing establishes
+which episodes they come from, so both are captioned "Production still, season
+one" and nothing more. A caption that guesses is how an archive starts lying.
+
+**`p1-total-downloads-april2012.jpg`** is listed in the Wayback index and would
+be good evidence for the 4.1-million figure, but every capture of it returns
+zero bytes. It is not held here and the site does not reproduce it.
 
 **`p1-title-big.png`** is the lighter 2015 title treatment. The site uses the
 2024 wordmark instead, as the most recent identity the production settled on.

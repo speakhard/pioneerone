@@ -79,12 +79,23 @@ def srcset(stem: str, widths: list[int], prefix: str) -> str:
 
 
 def display_date(iso: str) -> str:
-    """'2010-06-16' -> '16 June 2010'."""
+    """'2010-06-16' -> 'June 16, 2010'. US order throughout; this is a US show."""
     try:
         parsed = date.fromisoformat(iso)
     except ValueError as error:
         raise BuildError(f"bad date {iso!r} in content/episodes.toml: {error}") from error
-    return f"{parsed.day} {parsed:%B} {parsed.year}"
+    return f"{parsed:%B} {parsed.day}, {parsed.year}"
+
+
+def display_month(iso: str) -> str:
+    """'2010-06-08' -> 'June 8, 2010'; '2010-06' -> 'June 2010'."""
+    parts = iso.split("-")
+    try:
+        if len(parts) == 2:
+            return f"{date(int(parts[0]), int(parts[1]), 1):%B} {parts[0]}"
+        return display_date(iso)
+    except ValueError as error:
+        raise BuildError(f"bad date {iso!r} in content/press.toml: {error}") from error
 
 
 def prepare_episodes(raw: list[dict], prefix: str) -> list[dict]:
@@ -126,10 +137,17 @@ def structured_data(site: dict, episodes: list[dict], watch: dict) -> str:
             "numberOfSeasons": 1,
             "numberOfEpisodes": len(episodes),
             "datePublished": episodes[0]["released"] if episodes else None,
-            "creator": [
-                {"@type": "Person", "name": "Josh Bernhard"},
-                {"@type": "Person", "name": "Bracey Smith"},
-            ],
+            # "Developed by" is the credit the production settled on, but
+            # schema.org has no such property. The closest honest mapping is to
+            # name the writer as author and the director as director, rather
+            # than flattening both into "creator" — which is a credit Josh
+            # reserves for himself and which would misstate Bracey's part.
+            "author": {"@type": "Person", "name": "Josh Bernhard"},
+            "director": {"@type": "Person", "name": "Bracey Smith"},
+            "productionCompany": {
+                "@type": "Organization",
+                "name": "LastSat Productions LLC",
+            },
             "containsSeason": {
                 "@type": "TVSeason",
                 "seasonNumber": 1,
@@ -254,11 +272,17 @@ def build(site_dir: Path | None = None) -> Path:
 
     site_cfg = load_toml("site.toml")
     episodes_cfg = load_toml("episodes.toml")
+    credits_cfg = load_toml("credits.toml")
+    press_cfg = load_toml("press.toml")
 
     site = site_cfg["site"]
     watch = site_cfg["watch"]
     newsletter = site_cfg["newsletter"]
     laurels = episodes_cfg["laurel"]
+    press = [
+        {**item, "date_display": display_month(item["date"])}
+        for item in press_cfg["item"]
+    ]
 
     signup = newsletter_mode(newsletter)
 
@@ -287,6 +311,10 @@ def build(site_dir: Path | None = None) -> Path:
             signup=signup,
             episodes=episodes,
             laurels=laurels,
+            press=press,
+            cast=credits_cfg["cast"],
+            crew=credits_cfg["crew"],
+            production=credits_cfg["production"],
             page=page,
             rel=rel,
             canonical=f"{base}/{out_path.parent.as_posix() + '/' if out_path.parent.name else ''}",

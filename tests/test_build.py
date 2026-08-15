@@ -153,17 +153,34 @@ def test_episode_six_date_was_corrected(episodes: list[dict]):
 
 
 def test_the_now_section_promises_nothing(home: str):
-    """The brief is explicit: no greenlight, no financing, no announcement."""
-    lowered = home.lower()
-    assert "an announcement" in lowered
-    for overclaim in (
-        "season 2 is happening",
-        "officially announced",
-        "has been greenlit",
-        "now in production",
-        "fully financed",
-    ):
-        assert overclaim not in lowered, f"the page claims too much: {overclaim!r}"
+    """The brief is explicit: no greenlight, no financing, no announcement.
+
+    Checked as claims rather than as substrings. "nothing has been greenlit" is
+    a denial and must pass; "has been greenlit" on its own must not. The first
+    version of this test failed on the site's own disclaimer, which is the
+    right kind of mistake to have made once and not again.
+    """
+    text = re.sub(r"<[^>]+>", " ", home.lower())
+    text = re.sub(r"\s+", " ", text)
+
+    assert "an announcement" in text, "the Now section lost its disclaimer"
+
+    claims = (
+        r"season 2 is happening",
+        r"officially announced",
+        r"has been greenlit",
+        r"now in production",
+        r"fully financed",
+        r"in production",
+    )
+    negations = ("no ", "not ", "nothing ", "never ", "neither ", "isn't ", "is not ")
+    for claim in claims:
+        for match in re.finditer(claim, text):
+            preceding = text[max(0, match.start() - 60) : match.start()]
+            if not any(word in preceding for word in negations):
+                raise AssertionError(
+                    f"the page appears to claim {claim!r}: ...{preceding[-60:]}{claim}..."
+                )
 
 
 def test_extras_are_written(site: Path):

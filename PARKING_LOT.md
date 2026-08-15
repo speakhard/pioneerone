@@ -19,7 +19,7 @@ rather than showing a thin version of itself. Known to exist:
 - Contemporary press
 - Development-era drafts, treatments and pitch material from 2012–2022
 
-Doing this properly means cataloguing, confirming what may be shared, and
+Doing this properly means cataloging, confirming what may be shared, and
 presenting it well. It is a project, not a page. The site is already structured
 for it: episodes are data, not markup.
 

@@ -61,7 +61,7 @@
       </li>
       <li>
         <span class="facts__n">2 million<em>.</em></span>
-        <span class="facts__t">Downloads of the pilot in its first fortnight, over BitTorrent.</span>
+        <span class="facts__t">Downloads of the pilot in its first two weeks, over BitTorrent.</span>
       </li>
       <li>
         <span class="facts__n">Free<em>.</em></span>
@@ -115,11 +115,13 @@
     </ul>
 
     <p class="watch__foot">
-      <span>Also on
-        <a href="{{ watch.playlist_url }}" rel="noopener">YouTube as a playlist</a>,
-        and at the
-        <a href="{{ watch.archive_org_url }}" rel="noopener">Internet Archive</a>
+      <span>Also as a <a href="{{ watch.playlist_url }}" rel="noopener">YouTube playlist</a>,
+        on <a href="{{ watch.vod[0].url }}" rel="noopener">{{ watch.vod[0].name }}</a> and
+        <a href="{{ watch.vod[1].url }}" rel="noopener">{{ watch.vod[1].name }}</a>,
+        and at the <a href="{{ watch.archive_org_url }}" rel="noopener">Internet Archive</a>
         as the original release files.</span>
+      <span>Plus the <a href="{{ watch.videoblogs_url }}" rel="noopener">behind-the-scenes
+        video blogs</a>, shot while it was being made.</span>
     </p>
   </div>
 </section>
@@ -130,16 +132,17 @@
     <div class="split split--wide">
       <p class="split__lede">Two people tried to make television <em>without television.</em></p>
       <div class="prose">
-        <p>In 2010, Josh Bernhard and Bracey Smith raised $6,000 on Kickstarter and shot a pilot.
-        They gave it away through <a href="{{ rel }}story/">VODO</a>, which distributed films over
-        BitTorrent, because no network was going to commission a science-fiction drama from two
-        people nobody had heard of.</p>
+        <p>In 2010 that was a strange thing to attempt. No network was going to buy a
+        science-fiction drama from two people nobody had heard of, so Josh Bernhard and Bracey
+        Smith didn&rsquo;t ask one. They put the pilot out free over BitTorrent and let the
+        audience decide whether there should be more of it.</p>
 
-        <p>It was downloaded more than two million times in a fortnight. Strangers sent $20,000
-        through a PayPal button on the site. That money shot the next three episodes, filmed
-        together across one October. The last of the six went out in December 2011.</p>
+        <p>The audience decided there should, and paid for it. Almost everyone worked for
+        free. It took a year and a half and very nearly didn&rsquo;t finish.</p>
 
-        <p>Almost everyone worked for free.</p>
+        <p>That argument &mdash; that you can make television without television &mdash; is
+        settled now, and it went the way we said. It just took longer than we could
+        personally afford to wait.</p>
 
         <p><a href="{{ rel }}story/">Read the whole story &rarr;</a></p>
       </div>
@@ -177,8 +180,8 @@
     <ul class="now__list">
       <li>
         <strong>A feature film.</strong>
-        I&rsquo;m writing a feature-length interpretation of the material with a friend, who would
-        direct it.
+        I&rsquo;m writing a feature-length interpretation of the material &mdash; the same story,
+        told once, at the size a film can hold.
       </li>
       <li>
         <strong>The original six episodes.</strong>
@@ -192,7 +195,7 @@
     </ul>
 
     <p class="now__caveat">None of that is an announcement. There is no second season in production,
-    no financing in place, and nothing has been commissioned. This is a door being opened again,
+    no financing in place, and nothing has been greenlit. This is a door being opened again,
     which is a smaller and more honest thing than a relaunch.</p>
   </div>
 </section>
@@ -244,7 +247,8 @@
       <div class="prose">
         <p>Thirty-two behind-the-scenes video blogs were made during production, along with
         scripts, stills, artwork, cut footage, commentary tracks and a decade of paperwork.
-        Most of it has not been online in years.</p>
+        Most of it has not been online in years. (The
+        <a href="{{ watch.videoblogs_url }}" rel="noopener">video blogs are</a>.)</p>
         <p><a href="{{ rel }}archive/">What&rsquo;s in the archive &rarr;</a></p>
       </div>
     </div>

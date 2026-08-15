@@ -21,17 +21,17 @@ docs:
   - ~/Development/pioneerone/STORY-SOURCES.md
 git:
   branch: main
-  head: d4fc748
-  head_subject: 'Pioneer One: a site that leads with the show'
-  dirty: 1
+  head: 879437a
+  head_subject: Never publish a contact address nobody has checked
+  dirty: 4
   ahead: 0
   behind: 0
-  observed_at: '2026-08-15T17:01:25Z'
-latest_session: 20260815T170125Z-unknown.md
+  observed_at: '2026-08-15T20:25:14Z'
+latest_session: 20260815T202514Z-de5f5c4d.md
 resume:
   directory: /home/fs42/Development/pioneerone
   command: cd /home/fs42/Development/pioneerone && claude
-updated_at: '2026-08-15T17:01:25Z'
+updated_at: '2026-08-15T20:25:14Z'
 provenance:
   status:
     source: model
@@ -62,12 +62,12 @@ provenance:
     at: '2026-08-15T17:01:25Z'
   git:
     source: observed
-    at: '2026-08-15T17:01:25Z'
+    at: '2026-08-15T20:25:14Z'
 ---
 
 # pioneerone — Current State
 
-_Generated 2026-08-15T17:01:25Z. The front-matter above is the source of truth; this body is rendered from it._
+_Generated 2026-08-15T20:25:14Z. The front-matter above is the source of truth; this body is rendered from it._
 
 | | |
 |---|---|
@@ -75,9 +75,9 @@ _Generated 2026-08-15T17:01:25Z. The front-matter above is the source of truth; 
 | **Current milestone** | M1 complete — weekend MVP built, verified locally, committed and pushed private to speakhard/pioneerone (d4fc748) |
 | **Next milestone** | M2 — Cloudflare Pages project and custom domain; then the archive |
 | **Branch** | main |
-| **HEAD** | d4fc748 — Pioneer One: a site that leads with the show |
-| **Working tree** | 1 changed |
-| **Observed** | 2026-08-15T17:01:25Z |
+| **HEAD** | 879437a — Never publish a contact address nobody has checked |
+| **Working tree** | 4 changed |
+| **Observed** | 2026-08-15T20:25:14Z |
 
 ## Today's goal
 
@@ -160,6 +160,6 @@ Do not revisit completed architectural decisions unless necessary.
 | blockers | model | 2026-08-15T17:01:25Z | — |
 | risks | model | 2026-08-15T17:01:25Z | — |
 | docs | model | 2026-08-15T17:01:25Z | — |
-| git | observed | 2026-08-15T17:01:25Z | — |
+| git | observed | 2026-08-15T20:25:14Z | — |
 
-_Latest session log: `20260815T170125Z-unknown.md`_
+_Latest session log: `20260815T202514Z-de5f5c4d.md`_

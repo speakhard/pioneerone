@@ -1,0 +1,37 @@
+# Contemporary coverage.
+#
+# An index, not a highlight reel. Outlet, headline, date, link — no pull quotes
+# cherry-picked for flattery, because the interesting fact is that these
+# publications wrote about it at all, not what adjectives they used.
+#
+# Every URL below was requested and answered on 2026-08-15. The HuffPost link
+# returns 406 to automated requests (bot filtering, not a dead page); its
+# existence was confirmed against Wayback Machine captures from 2011 onward.
+#
+# There is more than this — the archive holds mentions from ForeverGeek,
+# Download Squad, Axiom's Edge, the DyscultureD podcast and others. These four
+# are the ones with live, checkable links today.
+
+[[item]]
+outlet = "TorrentFreak"
+headline = "Pioneer One, A BitTorrent Exclusive TV-Series"
+date = "2010-06-08"
+url = "https://torrentfreak.com/pioneer-one-a-bittorrent-exclusive-tv-series-100608/"
+
+[[item]]
+outlet = "The Mary Sue"
+headline = "Sci-Fi Thriller Series Pioneer One Debuts… For Torrents!"
+date = "2010-06"
+url = "https://www.themarysue.com/pioneer-one-torrent/"
+
+[[item]]
+outlet = "TorrentFreak"
+headline = "Pioneer One, The BitTorrent Exclusive TV-Series Continues"
+date = "2010-12-15"
+url = "https://torrentfreak.com/pioneer-one-the-bittorrent-exclusive-tv-series-continues-101215/"
+
+[[item]]
+outlet = "HuffPost"
+headline = "BitTorrent Gives Rise To Original TV Series, Pioneer One"
+date = "2011-03-29"
+url = "https://www.huffpost.com/entry/bittorent-pioneer-one-tv-series_n_841976"

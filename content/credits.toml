@@ -1,0 +1,115 @@
+# Cast and crew.
+#
+# The original site had /about/cast/ and /about/crew/ pages, but both were
+# published empty and stayed that way, so there is no authoritative list to
+# recover. This one is assembled from two sources, and `source` records which:
+#
+#   "channel"   named in the episode descriptions on the production's own
+#               YouTube channel — Josh's own current copy, so treated as solid
+#   "wikipedia" listed on the Pioneer One Wikipedia article and not confirmed
+#               anywhere the production wrote itself — please check these
+#   "blog"      named in a pioneerone.tv post at the time
+#
+# These are real people's screen credits. If anything here is wrong or missing
+# it should be fixed before anyone else reads it — see STORY-SOURCES.md.
+
+[[cast]]
+actor = "James Rich"
+role = "Tom Taylor"
+source = "channel"
+
+[[cast]]
+actor = "Aleksandr Evtushenko"
+role = "Yuri"
+source = "channel"
+
+[[cast]]
+actor = "Jack Haley"
+role = "Dr. Zachary Walzer"
+source = "channel"
+
+[[cast]]
+actor = "Laura Graham"
+role = "Jane Campbell"
+source = "channel"
+
+[[cast]]
+actor = "Einar Gunn"
+role = "Secretary Eric McClellan"
+source = "channel"
+
+[[cast]]
+actor = "Jean Neftin"
+role = "Aleksei Chertov"
+source = "channel"
+
+[[cast]]
+actor = "Alexandra Blatt"
+role = "Sofie Larson"
+source = "wikipedia"
+
+[[cast]]
+actor = "Guy Wegener"
+role = "Vernon"
+source = "wikipedia"
+
+[[cast]]
+actor = "E. James Ford"
+role = "Dileo"
+source = "wikipedia"
+
+[[cast]]
+actor = "Laurence Cantor"
+role = "Norton"
+source = "wikipedia"
+
+[[cast]]
+actor = "Matthew Foster"
+role = "Dr. Zachary Walzer, original pilot"
+source = "wikipedia"
+
+
+[[crew]]
+name = "Josh Bernhard"
+role = "Writer"
+source = "channel"
+
+[[crew]]
+name = "Bracey Smith"
+role = "Director"
+source = "channel"
+
+[[crew]]
+name = "Bracey Smith"
+role = "Visual effects"
+source = "blog"
+
+[[crew]]
+name = "Alice Millar"
+role = "Editor"
+source = "blog"
+
+[[crew]]
+name = "Dan Coletta"
+role = "Sound design"
+source = "blog"
+
+[[crew]]
+name = "Ari Meisel"
+role = "Executive producer"
+source = "wikipedia"
+
+[[crew]]
+name = "Louis Meisel"
+role = "Producer"
+source = "wikipedia"
+
+
+[production]
+company = "LastSat Productions LLC"
+developed_by = "Josh Bernhard and Bracey Smith"
+# Confirmed on the Internet Archive's copy of the VODO season-one release.
+licence = "Creative Commons Attribution-NonCommercial-ShareAlike"
+licence_url = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+locations = "Binghamton, New York; New York City; Long Island"
+locations_source = "wikipedia"

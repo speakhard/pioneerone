@@ -11,11 +11,15 @@ canonical_url = "https://pioneerone.tv"
 locale = "en_US"
 author = "Josh Bernhard"
 
-# The hook. Drawn from the show's own 2010 logline — "a forgotten Soviet space
-# mission has returned to Earth" — rather than written fresh, because the
-# original copy is better than anything a relaunch would invent.
+# The hook. Drawn from the show's own copy rather than written fresh.
+#
+# "Boy", not "man": the production's episode descriptions say "a boy of
+# mysterious origin is recovered from inside the capsule", and its own social
+# copy reads "A Boy from Mars Fell to Earth." The finale description gives the
+# rest of it — Yuri is "the child of two Soviet cosmonauts who were stranded on
+# Mars in the 1980s" — which is where "born on Mars" comes from.
 hero_line_1 = "An object falls out of the sky over North America."
-hero_line_2 = "Inside is a man who says he was sent to Mars by a country that no longer exists."
+hero_line_2 = "Inside is a boy who says he was born on Mars, to a country that no longer exists."
 
 # What search engines and messaging apps show. Kept to one sentence: it has to
 # survive being truncated on a phone.
@@ -28,6 +32,21 @@ playlist_url = "https://www.youtube.com/playlist?list=PLB3660316357A75BC"
 # Other places the season legitimately lives, for the people who would rather
 # not use YouTube. The Internet Archive copies are the original VODO releases.
 archive_org_url = "https://archive.org/details/pioneer.one.season1.720p.x264-vodo"
+
+# The behind-the-scenes video blogs, on the same channel.
+videoblogs_url = "https://www.youtube.com/playlist?list=PL415A85501F2F0603"
+
+# The season is also licensed out through Filmhub, so it turns up on the big
+# VOD services. Listed second: they cost money or an account, and YouTube is
+# free, instant and embeddable. But a show on Prime reads differently from a
+# show on YouTube, and some people would simply rather watch on a television.
+[[watch.vod]]
+name = "Prime Video"
+url = "https://www.primevideo.com/detail/Pioneer-One/0LQT9VEGDAJW03QZ4N3ZZ8AQCI"
+
+[[watch.vod]]
+name = "everywhere else"
+url = "https://www.justwatch.com/us/tv-show/pioneer-one"
 
 [newsletter]
 # One line switches this on. Any endpoint that accepts a POSTed `email` field

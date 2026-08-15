@@ -57,15 +57,15 @@ def load(name: str) -> Image.Image:
 
 
 def crop_to(im: Image.Image, ratio: float) -> Image.Image:
-    """Centre-crop to an aspect ratio, taking the width or height as needed."""
+    """Center-crop to an aspect ratio, taking the width or height as needed."""
     w, h = im.size
     if w / h > ratio:
         new_w = round(h * ratio)
         left = (w - new_w) // 2
         return im.crop((left, 0, left + new_w, h))
     new_h = round(w / ratio)
-    # Bias slightly above centre: faces sit in the upper half of most of these
-    # frames, and a true centre crop cuts foreheads.
+    # Bias slightly above center: faces sit in the upper half of most of these
+    # frames, and a true center crop cuts foreheads.
     top = int((h - new_h) * 0.4)
     return im.crop((0, top, w, top + new_h))
 
@@ -108,6 +108,18 @@ def build_hero() -> None:
 def build_keyart() -> None:
     im = crop_to(load("featured-video.jpg"), 16 / 9)
     print("  keyart:", ", ".join(save_widths(im, "keyart", (1200, 700))))
+
+
+# Two frames used to illustrate the story page. Their captions say only
+# "production still" — the filenames the production gave them do not identify
+# an episode, and a caption that guesses is how an archive starts lying.
+STORY_FIGURES = {"still-control": "vlc-a.png", "still-podium": "vlc-b.png"}
+
+
+def build_story_figures() -> None:
+    for stem, filename in STORY_FIGURES.items():
+        im = crop_to(load(filename), 16 / 9)
+        print(f"  {stem}:", ", ".join(save_widths(im, stem, (825, 560))))
 
 
 def build_social_card() -> None:
@@ -194,6 +206,7 @@ def main() -> None:
     build_hero()
     build_episode_cards()
     build_keyart()
+    build_story_figures()
     build_social_card()
     build_icons()
     build_wordmark()
