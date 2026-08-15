@@ -1,0 +1,103 @@
+# The first season, as the show itself described it.
+#
+# Every synopsis below is the original episode-page text, recovered verbatim
+# from pioneerone.tv's own RSS feed via the Wayback Machine (snapshots
+# 20160602235328 and 20150129020143). They are not rewritten. The show
+# introduced itself better in 2011 than a relaunch would today.
+#
+# `released` is the date the episode actually went out. Five come from the
+# episode pages; episode 6's own page says 2012, which is wrong — the page was
+# published in November 2012 and the contemporaneous announcement of
+# 2011-11-14 gives 13 December 2011, the season-finale screening was at
+# Anthology Film Archives on 5 December 2011, and the "Season 2 and beyond"
+# post declaring the season complete is dated 2011-12-14. See STORY-SOURCES.md.
+#
+# `youtube` is the video id on the production's own channel; `still` names a
+# frame recovered from the original site's media library.
+
+[[episode]]
+number = 1
+title = "Earthfall"
+subtitle = "Pilot"
+released = "2010-06-16"
+youtube = "68RD46kl8ng"
+still = "ep1"
+alt = "A Soviet mission patch stitched to a dust-covered flight suit."
+synopsis = "An object falls from the sky and spreads radiation over North America. Homeland Security Agents are dispatched to investigate and contain the damage. What they find will have implications for the entire world."
+
+[[episode]]
+number = 2
+title = "The Man From Mars"
+released = "2010-12-15"
+youtube = "eG-iLENGDrk"
+still = "ep2"
+alt = "Homeland Security staff crowded around a monitor in a makeshift office."
+synopsis = "30 hours after Earthfall, Tom Taylor and his DHS team attempt to uncover the truth about their mysterious prisoner."
+
+[[episode]]
+number = 3
+title = "Alone in the Night"
+released = "2011-03-28"
+youtube = "32YBygD3_iM"
+still = "ep3"
+alt = "A hand pressed flat against observation glass, a woman watching from the far side."
+synopsis = "Quarantined to the Calgary base for two weeks, Taylor and his team have bought time to get answers from the supposed Martian cosmonaut. But who can get him to talk?"
+
+[[episode]]
+number = 4
+title = "Triangular Diplomacy"
+released = "2011-04-28"
+youtube = "kbThDmSGCNM"
+still = "ep4"
+alt = "Two officials talking quietly in a government building."
+synopsis = "The media begins to question the story about the crashed satellite while Secretary McClellan plays hardball with the Russians."
+
+[[episode]]
+number = 5
+title = "Sea Change"
+released = "2011-10-05"
+youtube = "EgrG_Yb9RAY"
+still = "ep5"
+alt = "Two figures on a rooftop at sunset, the sun flaring across the lens."
+synopsis = "When an unannounced visitor breaks in to the Calgary base with just days left in the Quarantine, tensions are higher than ever. The fate of Yuri and everyone on Tom Taylor’s team is about to be decided."
+
+[[episode]]
+number = 6
+title = "War of the World"
+subtitle = "Season Finale"
+released = "2011-12-13"
+youtube = "sZkDhNfwm9Y"
+still = "ep6"
+alt = "A figure silhouetted in a red-lit doorway."
+synopsis = "As Taylor prepares to address the media, he and his team learn the consequences of their actions."
+
+
+# Awards, in the wording of the production's own laurels. Nothing is claimed
+# here that those four images do not say outright.
+[[laurel]]
+image = "nytvf"
+year = "2010"
+result = "Winner"
+award = "Best Drama Pilot"
+body = "New York Television Festival"
+
+[[laurel]]
+image = "webbydrama"
+year = "2012"
+result = "Nominee"
+award = "Best Drama"
+body = "Webby Awards"
+
+[[laurel]]
+image = "webbywriting"
+year = "2012"
+result = "Honoree"
+award = "Best Writing"
+body = "Webby Awards"
+
+[[laurel]]
+image = "iawtv"
+year = "2012"
+result = "Nominee"
+award = "Best Drama"
+body = "International Academy of Web Television"

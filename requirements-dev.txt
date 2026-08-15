@@ -1,0 +1,6 @@
+-r requirements.txt
+# Deriving images from assets-src/ (prepare_assets.py) — not needed to deploy.
+Pillow==10.2.0
+# Rendering the built site at device sizes (shoot.py) — not needed to deploy.
+playwright==1.49.0
+pytest==8.3.4

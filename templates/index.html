@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+
+{% block title %}Pioneer One &mdash; an independent science-fiction series{% endblock %}
+{% block og_title %}Pioneer One{% endblock %}
+
+{% block head_extra %}
+{# The hero is the largest-contentful-paint element on the page that matters
+   most, so it is preloaded. One frame serves every width — see the mobile
+   hero rules in style.css for why there is no separate phone crop. #}
+<link rel="preload" as="image" href="{{ rel }}static/img/hero-1400.jpg"
+      imagesrcset="{{ hero_srcset }}" imagesizes="100vw" fetchpriority="high">
+<script type="application/ld+json">
+{{ schema | safe }}
+</script>
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="hero__media">
+    {# The hero frame is the show's own: a Soviet patch on a suit that has been
+       lying in the dirt. It states the premise faster than the copy does. #}
+    <img src="{{ rel }}static/img/hero-1400.jpg"
+         srcset="{{ hero_srcset }}" sizes="100vw"
+         width="1920" height="1080" fetchpriority="high" decoding="async"
+         alt="A Soviet CCCP mission patch stitched to a dust-covered flight suit.">
+  </div>
+
+  <div class="shell hero__inner">
+    <h1 class="hero__title"><span class="pioneer">Pioneer</span><span class="one">One</span></h1>
+
+    <p class="hero__hook">
+      <span>{{ site.hero_line_1 }}</span>
+      <span>{{ site.hero_line_2 }}</span>
+    </p>
+
+    <div class="hero__actions">
+      <a class="btn" href="#watch">
+        <svg width="13" height="15" viewBox="0 0 13 15" aria-hidden="true" focusable="false">
+          <path d="M0 0v15l13-7.5z" fill="currentColor"/>
+        </svg>
+        Watch Pioneer One
+      </a>
+      <a class="btn btn--ghost" href="{{ rel }}story/">The story</a>
+    </div>
+
+    <p class="hero__meta">Six episodes &middot; Complete season &middot; Free to watch</p>
+  </div>
+</section>
+
+<section class="facts section" aria-label="About the series">
+  <div class="shell">
+    <ul class="facts__list">
+      <li>
+        <span class="facts__n">Six<em>.</em></span>
+        <span class="facts__t">Full-length episodes. One complete season, released 2010&ndash;2011.</span>
+      </li>
+      <li>
+        <span class="facts__n">$6,000<em>.</em></span>
+        <span class="facts__t">Raised on Kickstarter to shoot the pilot, back when Kickstarter still needed explaining.</span>
+      </li>
+      <li>
+        <span class="facts__n">2 million<em>.</em></span>
+        <span class="facts__t">Downloads of the pilot in its first fortnight, over BitTorrent.</span>
+      </li>
+      <li>
+        <span class="facts__n">Free<em>.</em></span>
+        <span class="facts__t">Given away from the start, and paid for directly by the people watching.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="watch" aria-labelledby="watch-h">
+  <div class="shell">
+    <p class="eyebrow">Watch</p>
+    <div class="split">
+      <h2 id="watch-h">The complete first season.</h2>
+      <div class="prose">
+        <p>All six episodes, in order, on the production&rsquo;s own channel. Nothing loads from
+        YouTube until you press play.</p>
+      </div>
+    </div>
+
+    <ul class="episodes" style="margin-top: clamp(2.25rem, 5vw, 3.5rem)">
+      {% for ep in episodes %}
+      <li class="episode">
+        <a class="episode__frame" href="https://www.youtube.com/watch?v={{ ep.youtube }}"
+           data-youtube="{{ ep.youtube }}"
+           aria-label="Play episode {{ ep.number }}, {{ ep.title }}">
+          <img src="{{ rel }}static/img/{{ ep.still }}-{{ ep.widths[-1] }}.jpg"
+               srcset="{{ ep.srcset }}"
+               sizes="(min-width: 68rem) 22rem, (min-width: 44rem) 45vw, 92vw"
+               width="{{ ep.widths[-1] }}" height="{{ (ep.widths[-1] * 9 / 16) | round | int }}" loading="lazy" decoding="async"
+               alt="{{ ep.alt }}">
+          <span class="episode__no">Episode {{ ep.number }}</span>
+          <span class="episode__play">
+            <svg viewBox="0 0 68 68" aria-hidden="true" focusable="false">
+              <circle cx="34" cy="34" r="33" fill="rgba(11,11,12,0.55)" stroke="#fff" stroke-width="1.5"/>
+              <path d="M27 21v26l21-13z" fill="#fff"/>
+            </svg>
+          </span>
+        </a>
+        <div class="episode__body">
+          <h3 class="episode__title">
+            <a href="https://www.youtube.com/watch?v={{ ep.youtube }}">{{ ep.title }}</a>
+          </h3>
+          <p class="episode__date">
+            {{ ep.released_display }}{% if ep.subtitle %} &middot; {{ ep.subtitle }}{% endif %}
+          </p>
+          <p class="episode__synopsis">{{ ep.synopsis }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <p class="watch__foot">
+      <span>Also on
+        <a href="{{ watch.playlist_url }}" rel="noopener">YouTube as a playlist</a>,
+        and at the
+        <a href="{{ watch.archive_org_url }}" rel="noopener">Internet Archive</a>
+        as the original release files.</span>
+    </p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="story-h">
+  <div class="shell">
+    <p class="eyebrow">How it was made</p>
+    <div class="split split--wide">
+      <p class="split__lede">Two people tried to make television <em>without television.</em></p>
+      <div class="prose">
+        <p>In 2010, Josh Bernhard and Bracey Smith raised $6,000 on Kickstarter and shot a pilot.
+        They gave it away through <a href="{{ rel }}story/">VODO</a>, which distributed films over
+        BitTorrent, because no network was going to commission a science-fiction drama from two
+        people nobody had heard of.</p>
+
+        <p>It was downloaded more than two million times in a fortnight. Strangers sent $20,000
+        through a PayPal button on the site. That money shot the next three episodes, filmed
+        together across one October. The last of the six went out in December 2011.</p>
+
+        <p>Almost everyone worked for free.</p>
+
+        <p><a href="{{ rel }}story/">Read the whole story &rarr;</a></p>
+      </div>
+    </div>
+
+    <ul class="laurels">
+      {% for l in laurels %}
+      <li>
+        <img src="{{ rel }}static/img/laurel-{{ l.image }}.png" width="243" height="133"
+             loading="lazy" decoding="async"
+             alt="{{ l.year }} {{ l.body }} &mdash; {{ l.award }}, {{ l.result }}">
+        <span>{{ l.result }} &middot; {{ l.award }}<br>{{ l.body }}, {{ l.year }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="now section" id="now" aria-labelledby="now-h">
+  <div class="shell">
+    <p class="eyebrow">Now</p>
+    <div class="split split--wide">
+      <h2 id="now-h">The story isn&rsquo;t necessarily over.</h2>
+      <div class="prose">
+        <p>After the first season I spent about a decade developing larger versions of Pioneer One
+        inside the film and television industry &mdash; good rooms, better writers than me,
+        real money on the table. I learned an enormous amount. None of it got made, and
+        by the end the thing being developed had drifted a long way from what I liked about
+        it in the first place.</p>
+
+        <p>I&rsquo;ve come back to it from somewhere else. Three things are actually happening:</p>
+      </div>
+    </div>
+
+    <ul class="now__list">
+      <li>
+        <strong>A feature film.</strong>
+        I&rsquo;m writing a feature-length interpretation of the material with a friend, who would
+        direct it.
+      </li>
+      <li>
+        <strong>The original six episodes.</strong>
+        Going back through the season and working out what a proper restoration and re-release
+        would actually involve.
+      </li>
+      <li>
+        <strong>What continuing it would mean.</strong>
+        Thinking seriously about the rest of the story &mdash; the part we never got to tell.
+      </li>
+    </ul>
+
+    <p class="now__caveat">None of that is an announcement. There is no second season in production,
+    no financing in place, and nothing has been commissioned. This is a door being opened again,
+    which is a smaller and more honest thing than a relaunch.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="signup-h">
+  <div class="shell">
+    <p class="eyebrow">Stay in touch</p>
+    <p class="signup__heading" id="signup-h">{{ newsletter.heading }}</p>
+    <p class="signup__note">{{ newsletter.note }}</p>
+
+    {% if newsletter.action %}
+    <form class="signup__form" action="{{ newsletter.action }}" method="post">
+      <label class="visually-hidden" for="email">Email address</label>
+      <input type="email" id="email" name="email" required autocomplete="email"
+             inputmode="email" placeholder="you@example.com">
+      <button class="btn" type="submit">Notify me</button>
+    </form>
+    {% else %}
+    {# No list provider is configured, so the site does not pretend to have one.
+       A mailto needs no service, cannot silently fail, and is honest about what
+       happens next. One line in content/site.toml replaces it with a real form. #}
+    <p><a class="btn" href="mailto:{{ newsletter.fallback_email }}?subject=Pioneer%20One%20updates">Add me to the list</a></p>
+    <p class="signup__aside">Opens an email to {{ newsletter.fallback_email }}. There is no list
+    software behind this yet, which seemed better than pretending there is.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="archive-h">
+  <div class="shell">
+    <p class="eyebrow">Archive</p>
+    <div class="split split--wide">
+      <h2 id="archive-h">There is a great deal of material.</h2>
+      <div class="prose">
+        <p>Thirty-two behind-the-scenes video blogs were made during production, along with
+        scripts, stills, artwork, cut footage, commentary tracks and a decade of paperwork.
+        Most of it has not been online in years.</p>
+        <p><a href="{{ rel }}archive/">What&rsquo;s in the archive &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ rel }}static/site.js" defer></script>
+{% endblock %}

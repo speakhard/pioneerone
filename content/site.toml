@@ -1,0 +1,40 @@
+# Pioneer One — what the site is and where it points.
+#
+# Everything here is prose or a public URL. No credentials, no local paths:
+# the build runs on somebody else's machine (Cloudflare Pages) and must never
+# need anything it cannot fetch from the open web.
+
+[site]
+name = "Pioneer One"
+tagline = "An independent science-fiction series."
+canonical_url = "https://pioneerone.tv"
+locale = "en_US"
+author = "Josh Bernhard"
+
+# The hook. Drawn from the show's own 2010 logline — "a forgotten Soviet space
+# mission has returned to Earth" — rather than written fresh, because the
+# original copy is better than anything a relaunch would invent.
+hero_line_1 = "An object falls out of the sky over North America."
+hero_line_2 = "Inside is a man who says he was sent to Mars by a country that no longer exists."
+
+# What search engines and messaging apps show. Kept to one sentence: it has to
+# survive being truncated on a phone.
+description = "Six episodes of independent science fiction, made outside the television system and released free online beginning in 2010. Watch the whole season."
+
+[watch]
+# The official channel. Every episode is here, posted by the production.
+channel_url = "https://www.youtube.com/@pioneeronetv"
+playlist_url = "https://www.youtube.com/playlist?list=PLB3660316357A75BC"
+# Other places the season legitimately lives, for the people who would rather
+# not use YouTube. The Internet Archive copies are the original VODO releases.
+archive_org_url = "https://archive.org/details/pioneer.one.season1.720p.x264-vodo"
+
+[newsletter]
+# One line switches this on. Any endpoint that accepts a POSTed `email` field
+# works — Buttondown, Listmonk, a Cloudflare Worker. While it is empty the
+# section renders a plain mailto link instead of a form, which needs no service
+# and cannot quietly break.
+action = ""
+fallback_email = "contact@pioneerone.tv"
+heading = "If Pioneer One continues, you’ll hear it here first."
+note = "Occasional, and only when there is something to say."

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}The story &mdash; Pioneer One{% endblock %}
+{% block og_title %}How Pioneer One got made{% endblock %}
+{% block description %}Two filmmakers, $6,000 on Kickstarter, and a science-fiction series given away over BitTorrent in 2010 — and the decade of development that followed.{% endblock %}
+
+{% block content %}
+
+<div class="page-head">
+  <div class="shell">
+    <p class="eyebrow">The story</p>
+    <h1>How it got made, and what happened next.</h1>
+    <p class="standfirst">Written by Josh Bernhard, who wrote it the first time.</p>
+  </div>
+</div>
+
+<div class="shell">
+  <article class="article prose">
+
+    <h2>Television without television</h2>
+
+    <p>In early 2010 my friend Bracey Smith and I decided to make a science-fiction drama.
+    Neither of us worked in television. We had made a feature together before &mdash;
+    <em>The Lionshare</em> &mdash; and given it away through a distributor called VODO, which
+    put films out over BitTorrent. That had gone better than anything else we had tried,
+    so we decided to do it again, at a scale we had no business attempting.</p>
+
+    <p>We raised $6,000 on Kickstarter. At the time, every request for money had to be
+    followed by an explanation of what Kickstarter was. It paid for one pilot episode.</p>
+
+    <p>The premise was straightforward. Something falls out of the sky over North America and
+    spreads radiation as it comes down. It looks like a terrorist attack. It is a Cold War
+    relic, and the man inside it says he was sent to Mars by a country that has not existed
+    for twenty years. We wrote it as a political and procedural drama that happens to have
+    a cosmonaut in it, rather than as science fiction with politics attached.</p>
+
+    <div class="pull">Everything past the initial premise had a root in something that actually happened.</div>
+
+    <h2>Giving it away</h2>
+
+    <p>The pilot went out on 16 June 2010, free, through VODO&rsquo;s BitTorrent network.
+    Within a fortnight it had been downloaded more than two million times.</p>
+
+    <p>In the same fortnight, people we had never met sent us about $20,000 through a
+    donation button. That is not a figure of speech about goodwill; it is how the rest of the
+    season was financed. There was no distributor advance and no network. The show existed
+    because a large number of strangers each decided it should.</p>
+
+    <p>That money shot episodes two, three and four together over a single October. The
+    remaining episodes were funded the same way, which is the reason for the long gaps between
+    them &mdash; every few months the production stopped and asked again.</p>
+
+    <h2>What it cost</h2>
+
+    <p>Almost everyone worked for free. Professional cast and crew did professional work and
+    were not paid for it, and the reason the season finished at six episodes rather than
+    continuing is that we had used up every favour we had.</p>
+
+    <p>Along the way: four hard drives failed the night before a release. A car hit a deer in
+    the rain driving back from a late shoot. For over a year the show was both our full-time
+    job, and neither of us was being paid for that either.</p>
+
+    <p>The pilot won Best Drama Pilot at the New York Television Festival in 2010, and aired
+    on NYC-TV in November 2011. The season was nominated for a Webby for Best Drama in 2012
+    and named a Webby honoree for writing. By that April the episodes had been downloaded
+    more than four million times.</p>
+
+    <p>The sixth episode premiered at Anthology Film Archives in New York on 5 December 2011
+    and was released on 13 December. Then it stopped.</p>
+
+    <h2>The years afterward</h2>
+
+    <p>What followed was about a decade of trying to make Pioneer One again, properly, inside
+    the industry that had not commissioned it the first time.</p>
+
+    <p>This part is genuinely difficult to write without sounding either bitter or boastful,
+    and it was neither. There were real opportunities. A producer in Los Angeles championed
+    the show for years. An established television director came on and wanted to make it.
+    There were successive versions &mdash; each larger, better funded on paper, and further
+    from the last &mdash; developed with people considerably more accomplished than I was.
+    Some of those rooms were the best education I have had. I would not give them back.</p>
+
+    <p>Nothing was made. That happens constantly and is not a scandal. The more interesting
+    problem was the other one: with every pass through conventional development, the thing
+    got bigger and looked more like everything else, and I gradually stopped recognising what
+    had made me want to write it. By the end I was defending a version of Pioneer One I did
+    not particularly want to watch.</p>
+
+    <div class="pull">In hindsight I am glad the big one never got made.</div>
+
+    <p>I moved to Los Angeles and worked as an editor and a writer. Bracey produced an
+    animated short and moved into virtual reality. Life did the ordinary thing of continuing.</p>
+
+    <h2>Where that leaves it</h2>
+
+    <p>What survived all of that is the original: six episodes, made for roughly the price of a
+    used car, by people who were not being paid, and watched by millions of people who were
+    not asked for anything. Whatever its limitations &mdash; and I can list them &mdash; it is
+    the version that actually exists, and it is the one I still like.</p>
+
+    <p>I am looking at it again now, from a different position and with considerably more
+    experience. What that turns into is <a href="{{ rel }}#now">described here</a>, carefully,
+    because nothing is settled.</p>
+
+    <figure>
+      <img src="{{ rel }}static/img/keyart-1200.jpg"
+           srcset="{{ rel }}static/img/keyart-700.jpg 700w, {{ rel }}static/img/keyart-1200.jpg 1200w"
+           sizes="(min-width: 74rem) 68rem, 92vw"
+           width="1200" height="675" loading="lazy" decoding="async"
+           alt="The Pioneer One ensemble cast, overlaid on a technical drawing of a spacecraft.">
+      <figcaption>Season one key art, 2011.</figcaption>
+    </figure>
+
+    <p><a href="{{ rel }}#watch">Watch the season &rarr;</a></p>
+
+  </article>
+</div>
+
+{% endblock %}
