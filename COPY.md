@@ -170,13 +170,9 @@ If Pioneer One continues, you’ll hear it here first.
 
 Occasional, and only when there is something to say.
 
-`p`
-
-Follow on YouTube
-
 `p.signup__aside`
 
-There is no mailing list yet — rather than a signup box with nothing behind it, here is the channel the episodes are on, which is where anything new would appear first.
+One list, run with Buttondown. No tracking, and you can leave in one click. Or follow on YouTube instead.
 
 ---
 

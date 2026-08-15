@@ -108,12 +108,104 @@ def test_the_skip_link_reaches_the_content(page):
 
 
 def test_headings_descend_in_order(page):
-    """One h1, and no level is skipped — the structure screen readers navigate by."""
-    for path in ("/", "/story/", "/archive/"):
-        page.goto(BASE + path, wait_until="load")
+    """One h1, and no level is skipped — the structure screen readers navigate by.
+
+    Every path here must be a real page. This test used to walk /archive/ after
+    that page was deleted and still passed, because Python's 404 page contains
+    exactly one <h1>. The status check below is what stops that recurring.
+    """
+    for path in ("/", "/story/"):
+        response = page.goto(BASE + path, wait_until="load")
+        assert response.status == 200, f"{path} returned {response.status}"
         levels = page.eval_on_selector_all(
             "h1, h2, h3", "els => els.map(e => Number(e.tagName[1]))"
         )
         assert levels.count(1) == 1, f"{path} has {levels.count(1)} h1 elements"
         for previous, current in zip(levels, levels[1:]):
             assert current <= previous + 1, f"{path} jumps from h{previous} to h{current}"
+
+
+# --- newsletter signup ---------------------------------------------------
+#
+# Every test here stubs the Buttondown endpoint. Nothing in this suite may put
+# a real address on a real mailing list, so the request is intercepted and
+# answered locally and the assertions are about what the page *sent* and what
+# it *said afterwards*.
+
+BUTTONDOWN = "**/embed-subscribe/**"
+
+
+def _fill_and_submit(page, email="reader@example.com"):
+    page.goto(BASE + "/", wait_until="load")
+    page.locator(".signup__form input[type=email]").fill(email)
+    page.locator(".signup__form button").click()
+
+
+def test_signup_posts_the_address_to_buttondown(page):
+    sent = {}
+
+    def handle(route, request):
+        sent["url"] = request.url
+        sent["method"] = request.method
+        sent["body"] = request.post_data
+        route.fulfill(status=200, body="ok")
+
+    page.route(BUTTONDOWN, handle)
+    _fill_and_submit(page)
+    page.wait_for_selector("#signup-status:not(:empty)")
+
+    assert sent["method"] == "POST"
+    assert sent["url"].endswith("/embed-subscribe/pioneeronetv"), sent["url"]
+    assert "email=reader%40example.com" in sent["body"], sent["body"]
+
+
+def test_a_successful_signup_says_the_confirmation_is_still_required(page):
+    page.route(BUTTONDOWN, lambda route: route.fulfill(status=200, body="ok"))
+    _fill_and_submit(page)
+    status = page.locator("#signup-status")
+    status.wait_for()
+    page.wait_for_function("() => document.querySelector('#signup-status').textContent.includes('Thanks')")
+
+    text = status.text_content().lower()
+    assert "confirmation" in text, text
+    assert page.locator(".signup__form").is_hidden()
+
+
+def test_a_failed_signup_never_claims_success(page):
+    """The failure that matters: telling somebody they subscribed when they did not."""
+    page.route(BUTTONDOWN, lambda route: route.fulfill(status=500, body="nope"))
+    _fill_and_submit(page)
+    page.wait_for_function(
+        "() => document.querySelector('#signup-status').textContent.includes('go through')"
+    )
+
+    status = page.locator("#signup-status")
+    text = status.text_content().lower()
+    assert "thanks" not in text and "subscribed" not in text, text
+    assert "500" in text, "the real status code should be reported, not hidden"
+    assert "buttondown.com/pioneeronetv" in text, "no way out was offered"
+    # The form must still be usable for a second attempt.
+    assert page.locator(".signup__form").is_visible()
+    assert not page.locator(".signup__form button").is_disabled()
+
+
+def test_a_network_failure_never_claims_success(page):
+    page.route(BUTTONDOWN, lambda route: route.abort())
+    _fill_and_submit(page)
+    page.wait_for_function(
+        "() => document.querySelector('#signup-status').textContent.includes('go through')"
+    )
+    assert "thanks" not in page.locator("#signup-status").text_content().lower()
+
+
+def test_the_form_still_posts_to_buttondown_without_javascript(browser):
+    context = browser.new_context(java_script_enabled=False, viewport={"width": 393, "height": 852})
+    page = context.new_page()
+    page.goto(BASE + "/", wait_until="load")
+    form = page.locator(".signup__form")
+    assert form.get_attribute("method").lower() == "post"
+    assert form.get_attribute("action") == (
+        "https://buttondown.com/api/emails/embed-subscribe/pioneeronetv"
+    )
+    assert page.locator('.signup__form input[name="email"]').count() == 1
+    context.close()

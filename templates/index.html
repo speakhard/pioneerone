@@ -216,12 +216,21 @@
        address is not published, because mail to a missing local part on this
        domain is accepted and then dropped without a bounce. #}
     {% if signup == "form" %}
-    <form class="signup__form" action="{{ newsletter.action }}" method="post">
+    {# Posts normally with no JavaScript, which lands on Buttondown's own
+       confirmation page. site.js upgrades it to submit in the background and
+       report what actually came back. #}
+    <form class="signup__form" action="{{ newsletter.action }}" method="post"
+          data-async data-fallback="{{ newsletter.action_fallback }}">
       <label class="visually-hidden" for="email">Email address</label>
       <input type="email" id="email" name="email" required autocomplete="email"
              inputmode="email" placeholder="you@example.com">
-      <button class="btn" type="submit">Notify me</button>
+      <button class="btn" type="submit">Subscribe</button>
     </form>
+    <p class="signup__status" id="signup-status" role="status" aria-live="polite"></p>
+    <p class="signup__aside">One list, run with
+      <a href="{{ newsletter.action_fallback }}" rel="noopener">Buttondown</a>.
+      No tracking, and you can leave in one click. Or
+      <a href="{{ watch.channel_url }}" rel="noopener">follow on YouTube</a> instead.</p>
 
     {% elif signup == "mailto" %}
     <p><a class="btn" href="mailto:{{ newsletter.fallback_email }}?subject=Pioneer%20One%20updates">Add me to the list</a></p>

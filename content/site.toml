@@ -49,22 +49,29 @@ name = "everywhere else"
 url = "https://www.justwatch.com/us/tv-show/pioneer-one"
 
 [newsletter]
-# One line switches this on. Any endpoint that accepts a POSTed `email` field
-# works — Buttondown, Listmonk, a Cloudflare Worker. While it is empty the
-# section renders a plain mailto link instead of a form, which needs no service
-# and cannot quietly break.
-action = ""
+# Buttondown. Any endpoint that accepts a POSTed `email` field would work here;
+# clearing this line drops the section back to a mailto, and clearing both drops
+# it to the YouTube channel. See newsletter_mode() in builder.py.
+#
+# The endpoint sends `access-control-allow-origin: *`, so the form can be
+# submitted in the background and the real response read. That matters: the
+# alternative is a no-cors request whose result is unreadable, which would mean
+# telling people they had subscribed without knowing whether they had.
+action = "https://buttondown.com/api/emails/embed-subscribe/pioneeronetv"
 
-# The address behind that mailto. `fallback_verified` must be set to true by
-# somebody who has actually sent mail to it and watched it arrive.
+# Where a visitor can subscribe if the background request fails.
+action_fallback = "https://buttondown.com/pioneeronetv"
+
+# The address behind the mailto, used only if `action` is cleared.
+# `fallback_verified` must be set to true by somebody who has actually sent mail
+# to it and watched it arrive.
 #
 # This is not ceremony. On 2026-08-15 the site was a step away from shipping a
 # "stay in touch" button pointing at contact@pioneerone.tv, which does not
 # exist — the domain has MX records at Bluehost, so mail to it is accepted and
 # then goes nowhere. A dead contact link fails silently and in the one direction
-# that matters: someone who wanted to hear more, not hearing more. So the build
-# refuses rather than trusting that the address is fine.
-fallback_email = "contact@pioneerone.tv"
-fallback_verified = false
+# that matters: someone who wanted to hear more, not hearing more.
+fallback_email = "pioneeronetv@gmail.com"
+fallback_verified = true
 heading = "If Pioneer One continues, you’ll hear it here first."
 note = "Occasional, and only when there is something to say."

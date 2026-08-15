@@ -95,6 +95,11 @@ body {
 
 img { max-width: 100%; height: auto; display: block; }
 
+/* Any class that sets `display` outranks the user-agent's `[hidden]` rule, so
+ * hiding an element from script silently does nothing. Caught by a test that
+ * asserted the signup form disappears once it has been submitted. */
+[hidden] { display: none !important; }
+
 a { color: inherit; }
 
 :focus-visible {
@@ -666,6 +671,16 @@ h3 { font-size: 1.1rem; letter-spacing: 0; }
 }
 
 .signup__note { color: var(--paper-dim); margin: 0 0 1.9rem; }
+
+.signup__status {
+  margin: 1rem 0 0;
+  font-size: 0.98rem;
+  color: var(--paper);
+  min-height: 1.5em;
+}
+
+.signup__status:empty { margin: 0; min-height: 0; }
+.signup__status.is-error { color: var(--red-bright); }
 
 .signup__aside {
   margin: 1.1rem 0 0;

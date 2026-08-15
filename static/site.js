@@ -40,3 +40,60 @@
     });
   });
 })();
+
+/* Newsletter signup.
+ *
+ * The form works without any of this: it POSTs to Buttondown and the visitor
+ * lands on Buttondown's confirmation page. This upgrade keeps them on the page
+ * instead — and, importantly, reads the actual response before saying anything.
+ *
+ * The endpoint sends `access-control-allow-origin: *`, so the status code is
+ * readable. Had it not been, the only option would have been a no-cors request
+ * whose outcome is invisible, and the honest thing then would have been to
+ * leave the plain form alone rather than print "thanks, you're subscribed" on
+ * the strength of having sent something into the dark.
+ */
+(function () {
+  "use strict";
+
+  var form = document.querySelector(".signup__form[data-async]");
+  if (!form || !window.fetch || !window.URLSearchParams) return;
+
+  var status = document.getElementById("signup-status");
+  var fallback = form.getAttribute("data-fallback");
+
+  function say(message, isError) {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("is-error", Boolean(isError));
+  }
+
+  form.addEventListener("submit", function (event) {
+    var field = form.querySelector('input[type="email"]');
+    var button = form.querySelector("button");
+    if (!field || !field.value || !field.checkValidity()) return;  // let the browser complain
+
+    event.preventDefault();
+    button.disabled = true;
+    say("Subscribing…");
+
+    fetch(form.action, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ email: field.value }).toString()
+    })
+      .then(function (response) {
+        if (!response.ok) throw new Error("the mailing list returned " + response.status);
+        form.hidden = true;
+        say("Thanks. There's a confirmation link in your inbox — it only counts once you click it.");
+      })
+      .catch(function (error) {
+        button.disabled = false;
+        say(
+          "That didn't go through (" + error.message + "). " +
+          "You can subscribe directly at " + fallback + ".",
+          true
+        );
+      });
+  });
+})();
